@@ -171,7 +171,7 @@
             return { success: false, error: '生词本不存在' };
         }
         
-        const index = notebook.words.findIndex(w => w.word === word);
+        const index = notebook.words.findIndex(w => w.word.toLowerCase() === word.toLowerCase());
         if (index === -1) {
             return { success: false, error: '单词不存在' };
         }
