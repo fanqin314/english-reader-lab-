@@ -43,6 +43,7 @@
         } catch(e) {
             console.warn('外部词库加载失败:', e);
             externalDict = {};
+            showToast('⚠️ 外部词库加载失败');
             return false;
         }
     }
