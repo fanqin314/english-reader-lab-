@@ -29,6 +29,8 @@
             }
         } catch(e) {
             console.warn('加载缓存失败', e);
+             if (e.name === 'QuotaExceededError') {
+                 showToast('❌ 存储空间不足');
         }
     }
 
