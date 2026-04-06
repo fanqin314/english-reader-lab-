@@ -95,7 +95,7 @@ Model: deepseek-chat
 点击 保存当前分析 将结果存入历史记录
 
 📁 项目结构
-text
+```text
 英语阅读实验室/
 ├── core/                # 核心基础设施（事件总线、缓存、API请求、模块注册）
 ├── features/            # 功能模块（深度解析、生词本、历史记录等）
@@ -106,13 +106,12 @@ text
 ├── assets/              # 静态资源（样式表）
 ├── index.html           # 入口页面
 └── README.md
+```
 详细结构说明请参阅 项目结构与功能分析
 
 🤝 贡献
 欢迎提交 Issue 或 Pull Request。请确保遵循项目编码规范（见 docs/coding_standards.md）。
 
-📄 许可证
-MIT License © 2026 fanqin314
 
 🙏 致谢
 DeepSeek 提供的强大 AI 模型
