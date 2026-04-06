@@ -52,9 +52,9 @@
 
 ### 1. 获取代码
 
-```bash
+bash
 git clone https://github.com/fanqin314/english-reader-lab-.git
-cd english-reader-lab-```
+cd english-reader-lab-
 2. 运行项目
 由于项目使用了 ES Module 和本地存储，必须使用本地服务器运行，不能直接双击打开 index.html。
 
