@@ -1,0 +1,407 @@
+/* 词性高亮样式 - pos_highlight.css */
+
+/* 词性颜色高亮 - 10种词性 */
+.pos-n { background-color: #8B5A2B; color: white; }
+.pos-v { background-color: #EF4444; color: white; }
+.pos-adj { background-color: #F97316; color: white; }
+.pos-adv { background-color: #EAB308; color: #1e293b; }
+.pos-pron { background-color: #22C55E; color: white; }
+.pos-prep { background-color: #3B82F6; color: white; }
+.pos-conj { background-color: #6366F1; color: white; }
+.pos-interj { background-color: #A855F7; color: white; }
+.pos-art { background-color: #EC4899; color: white; }
+.pos-num { background-color: #6B7280; color: white; }
+
+/* 高亮单词基础样式 */
+.highlight-word {
+    display: inline-block;
+    transition: background 0.1s;
+    border-radius: 4px;
+    padding: 0 2px;
+}
+
+/* 词性列表显示样式 */
+.pos-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.pos-badge {
+    background: #f1f5f9;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-family: monospace;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pos-badge:hover {
+    background: #e2e8f0;
+    transform: translateY(-1px);
+}
+
+/* 颜色样本显示（用于设置弹窗） */
+.color-sample {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+/* ========== 添加单词气泡样式 ========== */
+
+/* 气泡主容器 */
+.word-bubble {
+    position: absolute;
+    z-index: 1000;
+    min-width: 200px;
+    max-width: 260px;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+/* 气泡箭头 */
+.bubble-arrow {
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #ffffff;
+}
+
+/* 气泡在上方时的箭头 */
+.word-bubble.bubble-top .bubble-arrow {
+    top: auto;
+    bottom: -8px;
+    border-bottom: none;
+    border-top: 8px solid #ffffff;
+}
+
+/* 气泡内部容器 */
+.bubble-inner {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 气泡标题 */
+.bubble-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+
+/* 单词输入框 */
+.bubble-word-input {
+    width: 100%;
+    padding: 8px 10px;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1f2937;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.bubble-word-input:read-only {
+    cursor: default;
+}
+
+/* 标签文字 */
+.bubble-label {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+/* 生词本按钮容器 */
+.bubble-notebooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+/* 生词本按钮 */
+.bubble-nb-btn {
+    padding: 6px 12px;
+    background: #e0e0e0;
+    border: none;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bubble-nb-btn:hover {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+/* 新建生词本链接容器 */
+.bubble-new-link-container {
+    margin-top: 10px;
+}
+
+/* 新建生词本链接 */
+.bubble-new-link {
+    font-size: 13px;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 6px 0;
+    transition: color 0.2s ease;
+}
+
+.bubble-new-link:hover {
+    color: #3b82f6;
+}
+
+/* 新建生词本表单 */
+.bubble-new-form {
+    margin-top: 8px;
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+/* 新建生词本输入框 */
+.bubble-new-input {
+    width: 100%;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 13px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+.bubble-new-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* 新建生词本按钮容器 */
+.bubble-new-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+/* 新建生词本按钮 */
+.bubble-new-create-btn,
+.bubble-new-cancel-btn {
+    padding: 4px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* 创建按钮 */
+.bubble-new-create-btn {
+    background: #3b82f6;
+    color: white;
+    flex: 1;
+}
+
+.bubble-new-create-btn:hover {
+    background: #2563eb;
+}
+
+/* 取消按钮 */
+.bubble-new-cancel-btn {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.bubble-new-cancel-btn:hover {
+    background: #d1d5db;
+}
+
+/* 错误提示 */
+.bubble-new-error {
+    font-size: 12px;
+    color: #ef4444;
+    margin-top: 4px;
+    line-height: 1.3;
+}
+
+/* ========== 深色模式支持 ========== */
+
+@media (prefers-color-scheme: dark) {
+    /* 气泡箭头深色模式 */
+    .bubble-arrow {
+        border-bottom-color: #2d2d2d;
+    }
+    
+    .word-bubble.bubble-top .bubble-arrow {
+        border-top-color: #2d2d2d;
+    }
+    
+    /* 气泡内部深色模式 */
+    .bubble-inner {
+        background: #2d2d2d;
+    }
+    
+    /* 标题深色模式 */
+    .bubble-title {
+        color: #9ca3af;
+    }
+    
+    /* 单词输入框深色模式 */
+    .bubble-word-input {
+        background: #404040;
+        color: #f3f4f6;
+    }
+    
+    /* 标签深色模式 */
+    .bubble-label {
+        color: #9ca3af;
+    }
+    
+    /* 生词本按钮深色模式 */
+    .bubble-nb-btn {
+        background: #404040;
+        color: #d1d5db;
+    }
+    
+    .bubble-nb-btn:hover {
+        background: #4b5563;
+        color: #f3f4f6;
+    }
+    
+    /* 新建生词本链接深色模式 */
+    .bubble-new-link {
+        color: #9ca3af;
+    }
+    
+    .bubble-new-link:hover {
+        color: #60a5fa;
+    }
+    
+    /* 新建生词本表单深色模式 */
+    .bubble-new-form {
+        background: #374151;
+    }
+    
+    /* 新建生词本输入框深色模式 */
+    .bubble-new-input {
+        background: #4b5563;
+        border-color: #6b7280;
+        color: #f3f4f6;
+    }
+    
+    .bubble-new-input:focus {
+        border-color: #60a5fa;
+        box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+    }
+    
+    /* 创建按钮深色模式 */
+    .bubble-new-create-btn {
+        background: #2563eb;
+    }
+    
+    .bubble-new-create-btn:hover {
+        background: #1d4ed8;
+    }
+    
+    /* 取消按钮深色模式 */
+    .bubble-new-cancel-btn {
+        background: #4b5563;
+        color: #d1d5db;
+    }
+    
+    .bubble-new-cancel-btn:hover {
+        background: #374151;
+    }
+}
+
+/* 深色模式类（通过JS切换） */
+.dark-mode .bubble-arrow {
+    border-bottom-color: #2d2d2d;
+}
+
+.dark-mode .word-bubble.bubble-top .bubble-arrow {
+    border-top-color: #2d2d2d;
+}
+
+.dark-mode .bubble-inner {
+    background: #2d2d2d;
+}
+
+.dark-mode .bubble-title {
+    color: #9ca3af;
+}
+
+.dark-mode .bubble-word-input {
+    background: #404040;
+    color: #f3f4f6;
+}
+
+.dark-mode .bubble-label {
+    color: #9ca3af;
+}
+
+.dark-mode .bubble-nb-btn {
+    background: #404040;
+    color: #d1d5db;
+}
+
+.dark-mode .bubble-nb-btn:hover {
+    background: #4b5563;
+    color: #f3f4f6;
+}
+
+.dark-mode .bubble-new-link {
+    color: #9ca3af;
+}
+
+.dark-mode .bubble-new-link:hover {
+    color: #60a5fa;
+}
+
+.dark-mode .bubble-new-form {
+    background: #374151;
+}
+
+.dark-mode .bubble-new-input {
+    background: #4b5563;
+    border-color: #6b7280;
+    color: #f3f4f6;
+}
+
+.dark-mode .bubble-new-input:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+.dark-mode .bubble-new-create-btn {
+    background: #2563eb;
+}
+
+.dark-mode .bubble-new-create-btn:hover {
+    background: #1d4ed8;
+}
+
+.dark-mode .bubble-new-cancel-btn {
+    background: #4b5563;
+    color: #d1d5db;
+}
+
+.dark-mode .bubble-new-cancel-btn:hover {
+    background: #374151;
+}
