@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>英语精读实验室 | 模块化版本</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="features/deep_parse/pos_highlight/pos_highlight.css">
+    <link rel="stylesheet" href="features/vocabulary/memory_mode/flashcard_mode/flashcard_mode.css">
+</head>
+<body>
+<div class="container">
+    <!-- 头部卡片 -->
+    <div class="card">
+        <div class="card-header">
+            <h1><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="42" height="37" style="margin-left: -7px; margin-right: -7px; margin-top: -10px; margin-bottom: -10px;">
+   <!-- 左页 -->
+   <path d="M50 20 L50 75 L15 70 L15 15 Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" opacity="0.8"/>
+   <!-- 右页 -->
+   <path d="M50 20 L50 75 L85 70 L85 15 Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" opacity="0.6"/>
+   <!-- 书脊折痕 -->
+   <line x1="50" y1="20" x2="50" y2="75" stroke="currentColor" stroke-width="2" opacity="0.9"/>
+    
+   <!-- 左页文字行 -->
+   <line x1="25" y1="32" x2="42" y2="30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+   <line x1="28" y1="42" x2="44" y2="40" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+   <line x1="25" y1="52" x2="40" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    
+   <!-- 右页文字行 -->
+   <line x1="58" y1="30" x2="75" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+   <line x1="56" y1="40" x2="72" y2="42" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+   <line x1="60" y1="50" x2="75" y2="52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    
+   <!-- 左页字母 W 代表 Word -->
+   <text x="28" y="66" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="currentColor" opacity="0.8">W</text>
+    
+  
+   <!-- 右上角小星星 -->
+   <polygon points="85,12 88,20 96,20 90,26 92,34 85,29 78,34 80,26 74,20 82,20" fill="currentColor" opacity="0.8"/>
+ </svg> 英语精读实验室</h1>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <span id="apiStatusDot" class="status-dot status-red"></span>
+                <span id="apiStatusText">未配置</span>
+                <button id="settingsBtn" class="icon-btn" style="font-size: 20px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- 主按钮容器（深度解析、生词本） -->
+            <div id="mainButtonContainer" class="button-group"></div>
+            <!-- 文本输入框容器（深度解析模式下显示） -->
+            <div id="textareaContainer"></div>
+            <!-- 第二行按钮容器（深度解析模式下显示） -->
+            <div id="secondRowContainer" class="button-group"></div>
+            <!-- 全文翻译区域 -->
+            <div id="fullTranslationArea" style="margin-top: 20px; margin-bottom: 20px; padding: 12px; background: var(--bg-page); border-radius: 20px; display: block;">
+                <strong style="display: flex; align-items: center; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 全文翻译</strong><br>
+                <span id="fullTranslationText">敏捷的棕毛狐狸从懒狗身上跃过。尽管下着雨，她还是决定去散步，并且享受了清新的空气。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 动态内容区域（句子列表 或 生词本界面） -->
+    <div id="contentArea">
+        <div id="sentencesContainer"></div>
+    </div>
+
+    <!-- 二级分析界面 -->
+    <div id="secondaryAnalysisContainer" style="display: none;">
+        <div class="secondary-header">
+            <button id="backButton" class="icon-only-btn back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <h2>📊 分析结果</h2>
+        </div>
+        <div id="originalTextArea" style="margin-top: 16px; padding: 12px; background: var(--bg-page); border-radius: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="flex: 1;">
+                <strong>📝 英文原文</strong><br>
+                <span id="originalTextContent">The quick brown fox jumps over the lazy dog. Despite the rain, she decided to go for a walk and enjoyed the fresh air.</span>
+            </div>
+            <button id="copyOriginalTextBtn" class="copy" data-text-initial="复制原文" data-text-end="已复制！">
+                <svg class="clipboard" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                </svg>
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                </svg>
+                <span class="tooltip" data-text-initial="复制原文" data-text-end="已复制！"></span>
+            </button>
+        </div>
+        <div id="secondaryFullTranslationArea" style="margin-top: 16px; padding: 12px; background: var(--bg-page); border-radius: 20px; display: block;">
+                <strong style="display: flex; align-items: center; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> 全文翻译</strong><br>
+                <span id="secondaryFullTranslationText">敏捷的棕毛狐狸从懒狗身上跃过。尽管下着雨，她还是决定去散步，并且享受了清新的空气。</span>
+            </div>
+        <div id="secondarySentencesContainer"></div>
+    </div>
+</div>
+
+<!-- 自定义右键菜单容器 -->
+<div id="customMenu" class="custom-menu"></div>
+
+<!-- 设置弹窗容器 -->
+<div id="settingsModal" class="modal"></div>
+
+<!-- 词性高亮设置弹窗容器 -->
+<div id="posSettingsModal" class="modal"></div>
+
+<!-- 编辑单词释义弹窗容器 -->
+<div id="editWordModal" class="modal"></div>
+
+<div id="toast" class="toast"></div>
+
+<!-- 核心模块 -->
+<script src="core/module_registry.js"></script>
+<script src="core/module_interface_spec.js"></script>
+<script src="core/di_container.js"></script>
+<script src="core/event_bus.js"></script>
+<script src="core/error_handler.js"></script>
+<script src="core/security.js"></script>
+<script src="core/cache.js"></script>
+<script src="core/performance.js"></script>
+<script src="core/utils.js"></script>
+<script src="core/code_quality.js"></script>
+<script src="core/extension_manager.js"></script>
+<script src="core/base_analysis_button.js"></script>
+<script src="core/global_manager.js"></script>
+<script src="core/service_registration.js"></script>
+
+<!-- 测试脚本 -->
+<script src="test/optimization_evaluation.js"></script>
+
+<!-- 字典模块 -->
+<script src="modules/dictionary/dict.js"></script>
+
+<!-- 设置界面 -->
+<script src="ui/settings/settings_ui.js"></script>
+<script src="ui/settings/api_config.js"></script>
+<script src="ui/settings/dark_mode.js"></script>
+
+<!-- 主界面 -->
+<script src="ui/main_button.js"></script>
+
+    <!-- 分析模块 -->
+    <script src="features/deep_parse/sentence_analysis/split.js"></script>
+    <script src="core/api_request.js"></script>
+    <script src="features/deep_parse/sentence_analysis/sentence_card_render.js"></script>
+    <script src="features/deep_parse/full_translation/full_translation_logic.js"></script>
+
+    <!-- 分析界面按钮模块 -->
+    <script src="features/deep_parse/sentence_analysis/pos_button.js"></script>
+    <script src="features/deep_parse/sentence_analysis/syntax_button.js"></script>
+    <script src="features/deep_parse/sentence_analysis/knowledge_button.js"></script>
+    <script src="features/deep_parse/sentence_analysis/sentence_translate_button.js"></script>
+    <script src="ui/second_row/reload_button.js"></script>
+    <script src="modules/analysis/sentence_detail_handler.js"></script>
+    <script src="modules/analysis/deep_parse.js"></script>
+    <script src="features/history/history_analysis_renderer.js"></script>
+
+    <!-- 分析界面其他模块 -->
+    <script src="ui/analysis/second_row_ui.js"></script>
+
+    <!-- 历史记录模块 -->
+    <script src="history.js"></script>
+    <script src="features/history/history_data.js"></script>
+    <script src="features/history/history_list_ui.js"></script>
+    <script src="features/history/history_detail_ui.js"></script>
+
+    <!-- 词性高亮功能模块 (重构后) -->
+    <script src="features/deep_parse/pos_highlight/highlight_service.js"></script>
+    <script src="features/deep_parse/pos_highlight/highlight_controller.js"></script>
+    <script src="features/deep_parse/pos_highlight/highlight_render.js"></script>
+    <script src="features/deep_parse/pos_highlight/highlight_switch.js"></script>
+    <script src="features/deep_parse/pos_highlight/highlight_settings.js"></script>
+    <script src="features/deep_parse/pos_highlight/add_all_pos.js"></script>
+    <script src="ui/second_row/save_analysis.js"></script>
+    <script src="ui/second_row/load_example.js"></script>
+
+    <!-- 生词本功能 -->
+        <script src="features/vocabulary/vocab_data.js"></script>
+        <script src="features/vocabulary/vocab_card.js"></script>
+        <script src="features/vocabulary/notebook_tab_ui.js"></script>
+        <script src="features/vocabulary/vocab_ui.js"></script>
+        <script src="features/vocabulary/memory_mode/learning_stats/learning_stats_ui.js"></script>
+        <script src="features/vocabulary/memory_mode/learning_plan/learning_plan_ui.js"></script>
+        <script src="features/vocabulary/memory_mode/flashcard_mode/flashcard_mode.js"></script>
+        <script src="features/vocabulary/memory_mode/flashcard_mode/flashcard_ui.js"></script>
+    <script src="features/vocabulary/word_context_menu.js"></script>
+    <script src="ui/vocabulary/vocab_button.js"></script>
+
+<script>
+    // 创建应用命名空间
+    window.EnglishLab = window.EnglishLab || {};
+    
+    // 初始化应用
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOM 加载完成，开始初始化应用...');
+        
+        // 检查模块注册情况
+        console.log('ModuleRegistry 存在:', typeof window.ModuleRegistry !== 'undefined');
+        if (window.ModuleRegistry) {
+            console.log('当前注册的模块:', Object.keys(window.ModuleRegistry._modules || {}));
+            
+            // 尝试初始化所有模块
+            console.log('开始初始化所有模块...');
+            try {
+                window.ModuleRegistry.initializeAll();
+                console.log('所有模块初始化完成');
+            } catch (error) {
+                console.error('初始化模块时出错:', error);
+            }
+        }
+        
+        // 初始化主按钮
+        console.log('MainButtonManager 存在:', typeof window.MainButtonManager !== 'undefined');
+        if (window.MainButtonManager) {
+            console.log('初始化主按钮...');
+            try {
+                window.MainButtonManager.init();
+                console.log('主按钮初始化完成');
+            } catch (error) {
+                console.error('初始化主按钮时出错:', error);
+            }
+        } else {
+            console.error('MainButtonManager 未加载');
+        }
+        
+        // 初始化GlobalManager
+        const GlobalManager = ModuleRegistry.get('GlobalManager');
+        if (GlobalManager) {
+            GlobalManager.initialize({
+                VocabData: window.VocabData,
+                HistoryManager: window.HistoryManager,
+                APIRequest: window.APIRequest,
+                SentenceRenderer: window.SentenceRenderer,
+                CacheManager: window.CacheManager,
+                MainButtonManager: window.MainButtonManager,
+                HighlightService: window.HighlightService,
+                FlashcardMode: window.FlashcardMode,
+                FlashcardUI: window.FlashcardUI,
+                NotebookTabUI: window.NotebookTabUI
+            });
+            console.log('GlobalManager 初始化完成');
+        }
+
+        // 添加复制按钮功能
+        const copyOriginalTextBtn = document.getElementById('copyOriginalTextBtn');
+        if (copyOriginalTextBtn) {
+            copyOriginalTextBtn.addEventListener('click', () => {
+                const originalTextContent = document.getElementById('originalTextContent');
+                if (originalTextContent) {
+                    const text = originalTextContent.textContent;
+                    navigator.clipboard.writeText(text).then(() => {
+                        // 显示复制成功的提示
+                        const toast = document.getElementById('toast');
+                        if (toast) {
+                            toast.innerText = '文本已复制到剪贴板';
+                            toast.style.opacity = '1';
+                            setTimeout(() => toast.style.opacity = '0', 2000);
+                        }
+                    }).catch(err => {
+                        console.error('复制失败:', err);
+                        const toast = document.getElementById('toast');
+                        if (toast) {
+                            toast.innerText = '复制失败，请手动复制';
+                            toast.style.opacity = '1';
+                            setTimeout(() => toast.style.opacity = '0', 2000);
+                        }
+                    });
+                }
+            });
+        }
+        
+        // 将常用功能挂载到命名空间
+        window.EnglishLab = {
+            ModuleRegistry: window.ModuleRegistry,
+            MainButtonManager: window.MainButtonManager,
+            SentenceRenderer: window.SentenceRenderer,
+            CacheManager: window.CacheManager,
+            APIRequest: window.APIRequest,
+            VocabData: window.VocabData,
+            HistoryManager: window.HistoryManager,
+            HighlightService: window.HighlightService,
+            FlashcardMode: window.FlashcardMode,
+            FlashcardUI: window.FlashcardUI,
+            GlobalManager: GlobalManager
+        };
+    });
+</script>
+
+
+</body>
+</html>

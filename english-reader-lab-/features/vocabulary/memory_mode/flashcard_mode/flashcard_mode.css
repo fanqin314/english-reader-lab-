@@ -1,0 +1,533 @@
+/* 闪卡模式样式 - 基于 deepseek_html_20260408_6b9dd2.html */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 主题变量 (浅色) */
+:root {
+    --bg-gradient-start: #e0eafc;
+    --bg-gradient-end: #cfdef3;
+    --card-bg: rgba(255, 255, 255, 0.65);
+    --card-border-inset: rgba(255, 255, 255, 0.5);
+    --text-primary: #1e2a3e;
+    --text-secondary: #2c3e50;
+    --pos-bg: #d9e2ec;
+    --pos-color: #2c5a7a;
+    --pos-shadow-inset: rgba(0, 0, 0, 0.15);
+    --pos-shadow-outset: rgba(255, 255, 255, 0.6);
+    --counter-bg: #d9e2ec;
+    --counter-color: #2c5a7a;
+    --example-bg: rgba(255, 255, 255, 0.5);
+    --example-border: rgba(0, 0, 0, 0.05);
+    --btn-bg: #eef3fc;
+    --btn-color: #2c5a7a;
+    --btn-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05);
+    --btn-hover-bg: #4c9aff;
+    --btn-hover-color: white;
+    --btn-active-bg: #3a7ecf;
+    --nav-btn-bg: rgba(255, 255, 255, 0.7);
+    --nav-btn-color: #1e2a3e;
+    --nav-btn-border: rgba(0, 0, 0, 0.05);
+    --nav-btn-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+    --nav-btn-hover-bg: white;
+    --progress-bg: rgba(0, 0, 0, 0.08);
+    --progress-bar: linear-gradient(90deg, #4c9aff, #7fc9ff);
+    --word-gradient: linear-gradient(135deg, #1f3b4c, #2c5a7a);
+    --word-shadow: 2px 2px 4px rgba(0,0,0,0.1), 4px 4px 8px rgba(0,0,0,0.05);
+    --glare-color: rgba(255, 255, 255, 0.5);
+    --flip-bg: linear-gradient(145deg, #ffffff, #f3f7fc);
+    --flip-border: rgba(255,255,255,0.8);
+}
+
+body.dark {
+    --bg-gradient-start: #0f141e;
+    --bg-gradient-end: #1a1f2e;
+    --card-bg: rgba(22, 28, 40, 0.8);
+    --card-border-inset: rgba(255, 255, 255, 0.12);
+    --text-primary: #f0f4fa;
+    --text-secondary: #cbd5e6;
+    --pos-bg: #2a3446;
+    --pos-color: #b8d0ff;
+    --pos-shadow-inset: rgba(0, 0, 0, 0.5);
+    --pos-shadow-outset: rgba(255, 255, 255, 0.08);
+    --counter-bg: #2a3446;
+    --counter-color: #b8d0ff;
+    --example-bg: rgba(10, 15, 24, 0.6);
+    --example-border: rgba(255, 255, 255, 0.12);
+    --btn-bg: #2d3a52;
+    --btn-color: #c6ddff;
+    --btn-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    --btn-hover-bg: #4f7ec9;
+    --btn-active-bg: #3a5f9e;
+    --nav-btn-bg: rgba(20, 28, 40, 0.7);
+    --nav-btn-color: #e2ecff;
+    --nav-btn-border: rgba(255, 255, 255, 0.1);
+    --nav-btn-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
+    --nav-btn-hover-bg: rgba(60, 80, 120, 0.7);
+    --progress-bg: rgba(255, 255, 255, 0.12);
+    --progress-bar: linear-gradient(90deg, #6ea8fe, #a3c9ff);
+    --word-gradient: linear-gradient(135deg, #d9ebff, #f5faff);
+    --word-shadow: 0 0 16px rgba(110, 168, 254, 0.5), 2px 4px 10px rgba(0, 0, 0, 0.4);
+    --glare-color: rgba(255, 255, 255, 0.2);
+    --flip-bg: linear-gradient(145deg, #1e2638, #2a3448);
+    --flip-border: rgba(255,255,255,0.15);
+}
+
+/* 闪卡模式容器 */
+#flashcardModeContainer {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 闪卡容器 - 居中并固定大小 */
+.word-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.card-3d {
+    width: 600px;
+    height: 496px;
+    background: var(--card-bg);
+    backdrop-filter: blur(18px);
+    border-radius: 48px;
+    padding: 28px 24px 36px;
+    box-shadow: 0 25px 40px -12px rgba(0,0,0,0.25), 0 0 0 1px var(--card-border-inset) inset;
+    transition: transform 0.1s linear, box-shadow 0.2s;
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 响应式字体大小 */
+.word {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+}
+
+.flip-front {
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+}
+
+.flip-back {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+}
+
+.meaning {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+}
+
+.glare {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    border-radius: inherit;
+    background: radial-gradient(circle at 0% 0%, var(--glare-color) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    color: var(--text-primary);
+}
+
+/* 纯图标按钮（无文字） */
+.icon-only-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--btn-bg);
+    border: none;
+    color: var(--btn-color);
+    width: 44px;
+    height: 44px;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: var(--btn-shadow);
+    transition: all 0.2s;
+    transform: translateY(-1px);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--example-border);
+    padding: 0;
+}
+.icon-only-btn:hover {
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    box-shadow: 0 10px 16px rgba(0,0,0,0.3);
+    transform: translateY(-3px);
+}
+.icon-only-btn:active {
+    background: var(--btn-active-bg);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transform: translateY(1px);
+}
+.icon-only-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* 胶囊按钮 */
+.capsule-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 56px;
+    height: 80px;
+    background: var(--btn-bg);
+    border-radius: 28px;
+    box-shadow: var(--btn-shadow);
+    border: 1px solid var(--example-border);
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.capsule-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 16px rgba(0,0,0,0.3);
+}
+
+.capsule-btn {
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: var(--btn-color);
+}
+
+.capsule-btn:hover {
+    background: #3b82f6;
+    color: white;
+}
+
+.capsule-btn:active {
+    background: #2563eb;
+    transform: scale(0.95);
+}
+
+.capsule-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* 隐藏/显示翻译按钮特定样式 */
+button#toggleTranslationBtn {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+/* 生成例句按钮特定样式 */
+button#generateExampleBtn {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.capsule-divider {
+    width: 80%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 单词区域 */
+.word-section {
+    text-align: center;
+    margin-bottom: 28px;
+}
+.word-section.animate .word {
+    animation: fadeSlide 0.25s ease-out;
+}
+@keyframes fadeSlide {
+    0% { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.word {
+    font-size: 3.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: var(--word-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+    text-shadow: var(--word-shadow);
+}
+.pos {
+    font-size: 0.9rem;
+    background: var(--pos-bg);
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 40px;
+    margin-bottom: 12px;
+    color: var(--pos-color);
+    box-shadow: inset 0 2px 5px var(--pos-shadow-inset), 0 1px 0 var(--pos-shadow-outset);
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+}
+.meaning {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* 例句区域 — 左侧文本，右侧竖直按钮 */
+.example-area {
+    background: var(--example-bg);
+    border-radius: 28px;
+    padding: 20px 18px;
+    margin: 20px 0 12px;
+    border: 1px solid var(--example-border);
+    backdrop-filter: blur(8px);
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 15px;
+}
+.example-text {
+    flex: 1;
+}
+.example-en {
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    line-height: 1.5;
+    margin-bottom: 8px;
+    font-style: italic;
+    color: var(--text-primary);
+}
+.example-zh {
+    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+    color: var(--text-secondary);
+    transition: opacity 0.2s;
+}
+.hide-zh .example-zh {
+    display: none;
+}
+
+.button-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+/* 响应式调整按钮大小 */
+.icon-only-btn {
+    width: clamp(36px, 8vw, 44px);
+    height: clamp(36px, 8vw, 44px);
+}
+
+.capsule-button {
+    width: clamp(48px, 10vw, 56px);
+    height: clamp(80px, 20vw, 100px);
+}
+
+.nav-btn {
+    padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 26px);
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+}
+
+.counter {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    padding: clamp(6px, 1.5vw, 8px) clamp(14px, 3.5vw, 18px);
+}
+
+/* 翻转模式 */
+.flip-mode .pos,
+.flip-mode .meaning {
+    display: none !important;
+}
+.flip-container {
+    perspective: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+.flipper {
+    position: relative;
+    width: 100%;
+    max-width: 80vw;
+    height: clamp(100px, 25vw, 140px);
+    transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    margin: 0 auto;
+}
+.flip-mode .flipper:hover {
+    transform: rotateY(180deg);
+}
+.flip-front, .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 36px;
+    background: var(--flip-bg);
+    box-shadow: 0 15px 25px -8px rgba(0,0,0,0.2), inset 0 0 0 1px var(--flip-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    backdrop-filter: blur(12px);
+}
+.flip-front {
+    transform: rotateY(0deg);
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: var(--word-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: var(--word-shadow);
+}
+.flip-back {
+    transform: rotateY(180deg);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.4;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--example-border);
+}
+
+/* 导航按钮容器 */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+/* 导航按钮：阴影强化 + 反向3D倾斜（通过CSS变量实现） */
+.nav-btn {
+    --btn-rotate-x: 0deg;
+    --btn-rotate-y: 0deg;
+    background: var(--nav-btn-bg);
+    border: 1px solid var(--nav-btn-border);
+    color: var(--nav-btn-color);
+    padding: 12px 26px;
+    border-radius: 60px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--nav-btn-shadow);
+    transition: box-shadow 0.2s, background 0.2s, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transform: perspective(400px) rotateX(calc(var(--btn-rotate-x) * -1)) rotateY(calc(var(--btn-rotate-y) * -1));
+    will-change: transform;
+}
+.nav-btn svg {
+    width: 18px; height: 18px;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    fill: none;
+}
+/* 悬停时叠加额外旋转，与动态倾斜共存 */
+.nav-btn:hover {
+    background: var(--nav-btn-hover-bg);
+    box-shadow: 0 18px 28px rgba(0, 0, 0, 0.25), 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: perspective(400px) rotateX(calc(var(--btn-rotate-x) * -1 - 5deg)) rotateY(calc(var(--btn-rotate-y) * -1 - 5deg)) scale(1.03);
+}
+.nav-btn:active {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: perspective(400px) rotateX(calc(var(--btn-rotate-x) * -1 - 2deg)) rotateY(calc(var(--btn-rotate-y) * -1 - 2deg)) scale(0.97);
+}
+
+.counter {
+    font-size: 0.95rem;
+    background: var(--counter-bg);
+    padding: 8px 18px;
+    border-radius: 60px;
+    color: var(--counter-color);
+    box-shadow: inset 0 2px 6px var(--pos-shadow-inset), 0 1px 0 var(--pos-shadow-outset);
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+}
+.progress {
+    width: 100%; height: 5px; background: var(--progress-bg);
+    border-radius: 6px; margin-top: 28px; overflow: hidden;
+}
+.progress-bar {
+    height: 100%; background: var(--progress-bar);
+    border-radius: 6px; transition: width 0.25s;
+}
+
+/* 旋转动画 */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 空状态样式 */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    text-align: center;
+    padding: 20px;
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.empty-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+@media (max-width: 550px) {
+    .card-3d { padding: 20px 16px; }
+    .flip-front { font-size: 2rem; }
+    .flip-back { font-size: 1.5rem; }
+    .example-area { flex-direction: row; }
+    .button-group-vertical { flex-direction: row; justify-content: flex-end; width: 100%; }
+    .nav-btn { padding: 10px 20px; }
+}

@@ -1,0 +1,2931 @@
+/* style.css - 全局样式 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-page: #f5f7fb;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] {
+    --bg-page: #0f172a;
+    --card-bg: #1e293b;
+    --text: #f1f5f9;
+    --text-light: #94a3b8;
+    --border: #334155;
+}
+
+body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+    background: var(--bg-page);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 20px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 卡片 */
+.card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.card-body {
+    padding: 0 24px;
+    margin: 0;
+}
+
+/* 按钮组 */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 8px 0;
+}
+
+button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 40px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+button.secondary {
+    background: var(--btn-bg);
+    color: var(--text);
+}
+
+/* 主按钮样式 */
+button.main-btn {
+    background: var(--btn-bg);
+    color: var(--text);
+}
+
+/* 生词本界面的特定按钮样式 */
+div#vocabInterface > div.add-word-section > button.secondary {
+    height: 37px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 121px;
+}
+
+div#vocabInterface > div.create-notebook-section > button.secondary {
+    height: 37px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+button.icon-btn {
+    background: transparent;
+    padding: 6px;
+    font-size: 18px;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+button.icon-btn svg {
+    color: #d1d1d1;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] button.icon-btn svg {
+    color: #f3f4f6;
+}
+
+button.icon-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5), 0 0 40px rgba(99, 102, 241, 0.3);
+}
+
+button.icon-btn:hover svg {
+    transform: rotate(360deg) scale(1.2);
+    color: #818cf8;
+}
+
+[data-theme="dark"] button.icon-btn:hover {
+    box-shadow: 0 0 20px rgba(129, 140, 248, 0.5), 0 0 40px rgba(129, 140, 248, 0.3);
+}
+
+[data-theme="dark"] button.icon-btn:hover svg {
+    color: #a5b4fc;
+}
+
+button:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 状态点 */
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+.status-green { background: var(--success); }
+.status-red { background: var(--danger); }
+
+/* 句子卡片 */
+.sentence-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    transition: all 0.2s;
+}
+
+.sentence-text {
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 18px 20px;
+    background: #f8fafc;
+    border-radius: 20px 20px 0 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.6;
+    word-break: break-word;
+}
+[data-theme="dark"] .sentence-text {
+    background: #0f172a;
+}
+
+/* 高亮单词 - 样式已移至 features/pos_highlight/pos_highlight.css */
+
+.sentence-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+}
+.sentence-buttons button {
+    background: #f1f5f9;
+    color: var(--text);
+    padding: 5px 14px;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+[data-theme="dark"] .sentence-buttons button {
+    background: #334155;
+    color: white;
+}
+.sentence-buttons button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.sentence-buttons button.active {
+    background: var(--accent) !important;
+    color: white !important;
+    font-weight: 500;
+}
+
+.detail-panel {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    display: none;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+}
+.detail-panel.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+.detail-panel strong {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}
+.detail-panel div {
+    word-wrap: break-word;
+    white-space: normal;
+    margin-bottom: 8px;
+}
+.detail-panel br {
+    margin-bottom: 8px;
+}
+
+/* 词性列表样式已移至 features/pos_highlight/pos_highlight.css */
+
+.refresh-button {
+    width: 28px;
+    height: 28px;
+    border-radius: 10px;
+    background: #d9e2ec;
+    border: none;
+    box-shadow: 
+        inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.7),
+        1px 1px 3px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #4a5b6b;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.refresh-button:hover {
+    box-shadow: 
+        inset 1px 1px 2px rgba(0, 0, 0, 0.08),
+        inset -1px -1px 2px rgba(255, 255, 255, 0.6),
+        2px 2px 5px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+    color: #2c3e50;
+}
+
+.refresh-button:active {
+    box-shadow: 
+        inset 3px 3px 5px rgba(0, 0, 0, 0.12),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+    transform: translateY(1px);
+    color: #1e2b38;
+}
+
+.refresh-button svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.refresh-button:active svg {
+    transform: rotate(-180deg);
+}
+
+.refresh-button.spin:active svg {
+    animation: spin 0.6s ease-in-out;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+div#sentencesContainer > div.sentence-card > div.sentence-buttons > button.refresh-button > svg {
+    position: absolute;
+}
+
+/* 自定义菜单 */
+.custom-menu {
+    position: fixed;
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1) !important;
+    padding: 8px 0 !important;
+    z-index: 9999 !important;
+    min-width: 160px !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease !important;
+}
+.custom-menu.show {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+.custom-menu-item {
+    padding: 8px 16px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    color: var(--text) !important;
+}
+.custom-menu-item:hover { 
+    background: var(--border) !important;
+}
+.menu-divider {
+    height: 1px !important;
+    background: var(--border) !important;
+    margin: 4px 0 !important;
+}
+
+/* 弹窗 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+.modal-content {
+    background: rgba(245, 247, 251, 0.8);
+    border-radius: 50px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 24px;
+    color: var(--text);
+    box-shadow: 0px 12px 18px 4px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .modal-content {
+    background: rgba(30, 41, 59, 0.8);
+}
+input, select, textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    margin: 8px 0;
+    background: var(--bg-page);
+    color: var(--text);
+}
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-size: 14px;
+    z-index: 3000;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0;
+}
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 12px 0;
+}
+
+#posCheckboxGroup {
+    background-color: rgba(245, 247, 251, 0);
+    color: var(--text);
+    display: flex;
+    gap: 20px;
+}
+
+[data-theme="dark"] #posCheckboxGroup {
+    background-color: rgba(30, 41, 59, 0);
+}
+
+#posCheckboxGroup .checkbox-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#posCheckboxGroup > div.checkbox-column:nth-child(1) {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#posCheckboxGroup > div.checkbox-column:nth-child(2) {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#posCheckboxGroup input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#posCheckboxGroup input[type="checkbox"]:checked {
+    background-color: currentColor;
+    border-color: currentColor;
+}
+
+#posCheckboxGroup label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    width: 139px;
+    position: relative;
+    color: var(--text);
+}
+
+#posCheckboxGroup label input[type="checkbox"] {
+    color: var(--text);
+}
+
+#posCheckboxGroup label:has(input[type="checkbox"]:checked) input[type="checkbox"] {
+    color: inherit;
+}
+
+#posCheckboxGroup label span.color-sample {
+    margin-left: auto;
+}
+
+/* 自定义复选框样式 */
+.ui-checkbox, .select-all-checkbox {
+  --primary-color: #1677ff;
+  --secondary-color: #fff;
+  --primary-hover-color: #4096ff;
+  /* checkbox */
+  --checkbox-diameter: 20px;
+  --checkbox-border-radius: 5px;
+  --checkbox-border-color: #d9d9d9;
+  --checkbox-border-width: 1px;
+  --checkbox-border-style: solid;
+  /* checkmark */
+  --checkmark-size: 1.2;
+}
+
+.ui-checkbox, .select-all-checkbox,
+.ui-checkbox *, .select-all-checkbox *,
+.ui-checkbox *::before, .select-all-checkbox *::before,
+.ui-checkbox *::after, .select-all-checkbox *::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ui-checkbox, .select-all-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: var(--checkbox-diameter);
+  height: var(--checkbox-diameter);
+  border-radius: var(--checkbox-border-radius);
+  background: var(--secondary-color);
+  border: var(--checkbox-border-width) var(--checkbox-border-style) var(--checkbox-border-color);
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 全选复选框样式调整 */
+.select-all-checkbox {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.ui-checkbox::after, .select-all-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+  box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+  border-radius: inherit;
+  opacity: 0;
+  -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+
+.ui-checkbox::before, .select-all-checkbox::before {
+  top: 40%;
+  left: 50%;
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 7px;
+  border-right: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  opacity: 0;
+  -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+  -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+  transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+}
+
+/* actions */
+
+.ui-checkbox:hover, .select-all-checkbox:hover {
+  border-color: var(--primary-color);
+}
+
+.ui-checkbox:checked, .select-all-checkbox:checked {
+  background: var(--primary-color);
+  border-color: transparent;
+}
+
+.ui-checkbox:checked::before, .select-all-checkbox:checked::before {
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+}
+
+.ui-checkbox:active:not(:checked)::after, .select-all-checkbox:active:not(:checked)::after {
+  -webkit-transition: none;
+  -o-transition: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  opacity: 1;
+}
+
+/* 全选复选框悬停提示 */
+.select-all-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.select-all-label::after {
+  content: "全选";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-page);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-bottom: 11px;
+}
+
+.select-all-label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-1px);
+}
+
+/* 为词性复选框应用相同样式 */
+#posCheckboxGroup input[type="checkbox"] {
+  --secondary-color: #fff;
+  --checkbox-diameter: 20px;
+  --checkbox-border-radius: 5px;
+  --checkbox-border-width: 2px;
+  --checkbox-border-style: solid;
+  --checkmark-size: 1.2;
+  
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: var(--checkbox-diameter);
+  height: var(--checkbox-diameter);
+  border-radius: var(--checkbox-border-radius);
+  background: var(--secondary-color);
+  border: var(--checkbox-border-width) var(--checkbox-border-style) currentColor;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+  color: inherit;
+}
+
+#posCheckboxGroup input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) currentColor;
+  box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) currentColor;
+  border-radius: inherit;
+  opacity: 0;
+  -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+
+#posCheckboxGroup input[type="checkbox"]::before {
+  top: 40%;
+  left: 50%;
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 7px;
+  border-right: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  opacity: 0;
+  -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+  -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+  transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+}
+
+#posCheckboxGroup input[type="checkbox"]:hover {
+  border-color: currentColor;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+#posCheckboxGroup input[type="checkbox"]:checked {
+  background: currentColor;
+  border-color: transparent;
+  color: inherit;
+}
+
+#posCheckboxGroup input[type="checkbox"]:checked::before {
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+}
+
+#posCheckboxGroup input[type="checkbox"]:active:not(:checked)::after {
+  -webkit-transition: none;
+  -o-transition: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  opacity: 1;
+}
+
+.checkbox-group label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+/* color-sample 样式已移至 features/pos_highlight/pos_highlight.css */
+
+/* 设置头部行 */
+.setting-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0;
+}
+
+.setting-header-row h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* 毛玻璃拨动开关 */
+.glass-toggle {
+    position: relative;
+}
+
+.glass-toggle input {
+    display: none;
+}
+
+.glass-toggle .toggle-label {
+    display: block;
+    width: 72px;
+    height: 36px;
+    background: rgba(226, 232, 240, 0.55);
+    backdrop-filter: blur(8px);
+    border: 1px solid #fafafa;
+    border-radius: 60px;
+    box-shadow: 0px 5px 6px 0px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.25s, box-shadow 0.2s, transform 0.1s;
+    cursor: pointer;
+    position: relative;
+}
+
+.glass-toggle .toggle-label:hover {
+    background: rgba(203, 213, 225, 0.65);
+    transform: translateY(-1px);
+}
+
+.glass-toggle .toggle-label:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.glass-toggle .toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 28px;
+    height: 28px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glass-toggle input:checked + .toggle-label {
+    background: rgba(203, 213, 225, 0.75);
+}
+
+.glass-toggle input:checked + .toggle-label .toggle-slider {
+    transform: translateX(38px);
+}
+
+.glass-toggle .toggle-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    transition: opacity 0.3s ease;
+}
+
+.glass-toggle .light-icon {
+    opacity: 1;
+    color: #fbbf24;
+}
+
+.glass-toggle .dark-icon {
+    opacity: 0;
+    color: #3b82f6;
+}
+
+.glass-toggle input:checked + .toggle-label .light-icon {
+    opacity: 0;
+}
+
+.glass-toggle input:checked + .toggle-label .dark-icon {
+    opacity: 1;
+}
+
+/* 生词本界面卡片样式 */
+.vocab-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.vocab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.vocab-header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.notebook-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.notebook-tab {
+    background: var(--btn-bg);
+    color: var(--text);
+    border: none;
+    padding: 6px 16px;
+    border-radius: 40px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.notebook-tab.active {
+    background: var(--accent);
+    color: white;
+}
+.word-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--card-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    flex: 1 1 calc(25% - 12px);
+    max-width: calc(25% - 12px);
+    min-height: 80px;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+/* 响应式调整 - 适配各种屏幕尺寸 */
+/* 超大屏幕 (1920px及以上) - 4个/行 */
+@media (max-width: 1920px) {
+    .word-item {
+        flex: 1 1 calc(25% - 12px);
+        max-width: calc(25% - 12px);
+    }
+}
+
+/* 大屏幕 (1366px - 1919px) - 4个/行 */
+@media (max-width: 1366px) {
+    .word-item {
+        flex: 1 1 calc(33.333% - 12px);
+        max-width: calc(33.333% - 12px);
+    }
+}
+
+/* 中等屏幕 (768px - 1365px) - 3个/行 */
+@media (max-width: 768px) {
+    .word-item {
+        flex: 1 1 calc(50% - 12px);
+        max-width: calc(50% - 12px);
+    }
+}
+
+/* 小屏幕 (480px - 767px) - 2个/行 */
+@media (max-width: 480px) {
+    .word-item {
+        flex: 1 1 calc(50% - 12px);
+        max-width: calc(50% - 12px);
+    }
+}
+
+/* 超小屏幕 (375px及以下) - 1个/行 */
+@media (max-width: 375px) {
+    .word-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+/* 记忆模式按钮样式 */
+.memory-mode-button-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.06));
+}
+
+.memory-mode-outer-glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    transition: all 1000ms;
+    background: linear-gradient(to right, #6366f1, #ec4899, #facc15);
+    border-radius: 9999px;
+    filter: blur(12px);
+    z-index: 0;
+}
+
+.memory-mode-button-wrapper:hover .memory-mode-outer-glow {
+    opacity: 0.85;
+    transition-duration: 200ms;
+    filter: blur(14px);
+}
+
+.memory-mode-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border: 0;
+    overflow: hidden;
+    border-radius: 9999px;
+    transition: all 0.2s;
+    font-weight: 600;
+    cursor: pointer;
+    color: #1e293b;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+    isolation: isolate;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.memory-mode-button:hover {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25), 0 0 0 1px #ffffff inset;
+    transform: translateY(-2px);
+    color: #0f172a;
+}
+
+.memory-mode-button:active {
+    transform: scale(0.97) translateY(0);
+}
+
+.memory-mode-hover-effect {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.memory-mode-hover-effect div {
+    background: linear-gradient(
+        90deg,
+        #de004b 0%,
+        #bf46ff 49%,
+        #00d4ff 100%
+    );
+    border-radius: 9999px;
+    width: 12rem;
+    height: 8rem;
+    transition: 0.4s;
+    filter: blur(28px);
+    animation: rotate-glow 4s linear infinite;
+    opacity: 0.4;
+}
+
+.memory-mode-button:hover .memory-mode-hover-effect div {
+    width: 10rem;
+    height: 6rem;
+    opacity: 0.7;
+}
+
+@keyframes rotate-glow {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.memory-mode-button-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.memory-mode-arrow {
+    display: inline-flex;
+    transition: transform 0.2s;
+}
+
+.memory-mode-button:hover .memory-mode-arrow {
+    transform: translateX(3px);
+}
+
+.memory-mode-arrow svg {
+    stroke: #1e293b;
+}
+
+.memory-mode-button:hover .memory-mode-arrow svg {
+    stroke: #0f172a;
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] .memory-mode-button {
+    background: rgba(30, 41, 59, 0.75);
+    color: #f1f5f9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(51, 65, 85, 0.5) inset;
+    border: 1px solid rgba(51, 65, 85, 0.8);
+}
+
+[data-theme="dark"] .memory-mode-button:hover {
+    background: rgba(30, 41, 59, 0.9);
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3), 0 0 0 1px rgba(51, 65, 85, 0.8) inset;
+}
+
+[data-theme="dark"] .memory-mode-arrow svg {
+    stroke: #f1f5f9;
+}
+
+[data-theme="dark"] .memory-mode-button:hover .memory-mode-arrow svg {
+    stroke: #ffffff;
+}
+.word-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+.word-detail {
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+}
+.word-detail strong {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+.word-detail small {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 4px;
+    display: block;
+}
+.word-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(-100%) scaleY(0);
+    transform-origin: top center;
+    transition: all 0.3s ease;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 0;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    height: 34px;
+}
+.word-item.active .word-actions {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+}
+.edit-word-btn, .delete-word-btn {
+    background: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 13px;
+}
+.edit-word-btn:hover {
+    background: var(--warning);
+    color: white;
+    border-color: var(--warning);
+}
+.delete-word-btn:hover {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+
+/* 单词列表容器 */
+.words-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 生词本统计信息 */
+.vocab-stats {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+.vocab-stats span {
+    margin: 0 8px;
+}
+
+/* 生词本标签页包装器 */
+.notebook-tab-wrapper {
+    display: grid;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 0 12px 12px 0;
+    position: relative;
+    width: 84px;
+}
+
+/* 生词本操作按钮 */
+.notebook-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+    opacity: 1;
+    visibility: visible;
+}
+.notebook-action-btn {
+    background: var(--bg-page);
+    border: 1px solid var(--border);
+    padding: 6px 8px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+}
+.notebook-action-btn:hover {
+    background: var(--border);
+    transform: translateY(-1px);
+}
+.notebook-action-btn.delete {
+    color: var(--danger);
+    border-color: var(--danger);
+}
+.notebook-action-btn.delete:hover {
+    background: var(--danger);
+    color: white;
+}
+
+/* 记忆模式区域 */
+.memory-mode-section {
+    margin-bottom: 20px;
+}
+
+/* 特定元素样式 */
+div#vocabInterface > div.create-notebook-section {
+    width: 100%;
+    margin: 0;
+}
+
+div#vocabInterface > div.memory-mode-section {
+    width: 116px;
+}
+
+div#vocabInterface > div.memory-mode-section > button.secondary {
+    position: absolute;
+    top: auto;
+    z-index: auto;
+    left: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* 创建生词本区域 */
+.create-notebook-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.notebook-name-input {
+    flex: 1;
+    min-width: 150px;
+}
+
+/* 添加单词区域 */
+.add-word-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.word-input, .meaning-input {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* 工具栏 */
+.words-toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 12px;
+    background: var(--bg-page);
+    border-radius: 30px;
+}
+
+/* 特定工具栏样式 */
+div#vocabInterface > div.words-toolbar {
+    background-color: transparent;
+}
+
+/* 搜索框 */
+.search-box {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form {
+    --timing: 0.3s;
+    --width-of-input: 200px;
+    --height-of-input: 40px;
+    --border-height: 2px;
+    --input-bg: var(--card-bg);
+    --border-color: var(--accent);
+    --border-radius: 30px;
+    --after-border-radius: 1px;
+    position: relative;
+    width: 100%;
+    height: var(--height-of-input);
+    display: flex;
+    align-items: center;
+    padding-inline: 0.8em;
+    border-radius: var(--border-radius);
+    transition: border-radius 0.5s ease;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+}
+
+.input {
+    font-size: 0.9rem;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+    border: none;
+    color: var(--text);
+}
+
+.form:before {
+    content: "";
+    position: absolute;
+    background: var(--border-color);
+    transform: scaleX(0);
+    transform-origin: center;
+    width: 100%;
+    height: var(--border-height);
+    left: 0;
+    bottom: 0;
+    border-radius: 1px;
+    transition: transform var(--timing) ease;
+}
+
+.form:focus-within {
+    border-radius: var(--after-border-radius);
+}
+
+input:focus {
+    outline: none;
+}
+
+.form:focus-within:before {
+    transform: scale(1);
+}
+
+.reset {
+    border: none;
+    background: none;
+    opacity: 0;
+    visibility: hidden;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form input:not(:placeholder-shown) ~ .reset {
+    opacity: 1;
+    visibility: visible;
+}
+
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+}
+
+.search-icon svg {
+    width: 17px;
+    height: 17px;
+    color: #8b8ba7;
+}
+
+.form svg {
+    width: 17px;
+    margin-top: 3px;
+    color: #8b8ba7;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* 排序控件 */
+.sort-controls {
+    display: flex;
+    align-items: center;
+}
+
+.custom-sort-select {
+    position: relative;
+    display: inline-block;
+}
+
+.sort-select-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    background: var(--card-bg);
+    color: var(--text);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sort-select-trigger:hover {
+    border-color: var(--accent);
+}
+
+.sort-select-trigger.active {
+    border-color: var(--accent);
+    background: var(--bg-page);
+}
+
+.sort-select-trigger svg {
+    transition: transform 0.2s;
+}
+
+.sort-select-trigger.active svg {
+    transform: rotate(180deg);
+}
+
+.sort-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 120px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s, visibility 0.2s;
+    overflow: hidden;
+}
+
+.sort-dropdown.show {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.sort-option {
+    padding: 10px 14px;
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.sort-option:hover {
+    background: var(--bg-page);
+}
+
+.sort-option.selected {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.sort-option:first-child {
+    border-radius: 11px 11px 0 0;
+}
+
+.sort-option:last-child {
+    border-radius: 0 0 11px 11px;
+}
+
+/* 批量操作按钮 */
+.batch-mode-btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+/* 导入导出按钮组 */
+.import-export-btns {
+    display: flex;
+    gap: 8px;
+}
+
+/* 批量操作栏 */
+.batch-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 12px;
+    background: var(--bg-page);
+    border-radius: 30px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+/* 生词本界面的批量操作栏 */
+div#vocabInterface > div.batch-actions-bar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.select-all-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.selected-count {
+    font-size: 14px;
+    color: var(--text-light);
+}
+.batch-delete-btn {
+    margin-left: auto;
+}
+.batch-delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 单词项 */
+.word-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    border-radius: 20px;
+    transition: background 0.2s;
+}
+.word-item:last-child { border-bottom: none; }
+.word-item:hover {
+    background: var(--bg-page);
+}
+.word-item.selected {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* 复选框 */
+.word-checkbox {
+    margin-right: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 20px;
+    height: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 2px solid #3b82f6;
+    background-color: white;
+    transition: all 0.2s ease;
+}
+
+.word-checkbox:checked {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+/* 单词详情 */
+.word-detail {
+    flex: 1;
+    min-width: 0;
+}
+.word-detail strong {
+    font-size: 1rem;
+    word-break: break-word;
+}
+.word-detail small {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    word-break: break-word;
+}
+.word-context {
+    display: block;
+    margin-top: 4px;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.word-example {
+    display: block;
+    margin-top: 4px;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    color: var(--accent);
+}
+
+/* 单词操作按钮 */
+.word-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: 12px;
+}
+.edit-word-btn, .delete-word-btn {
+    background: transparent;
+    border: none;
+    padding: 6px 10px;
+}
+
+/* 编辑表单 */
+.edit-form {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
+    transform: translateY(-5px);
+}
+
+.form-group {
+    margin-bottom: 8px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 13px;
+    background: var(--bg-page);
+    color: var(--text);
+    transition: border-color 0.2s;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+    font-family: inherit;
+}
+
+.form-actions {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.save-btn,
+.cancel-btn {
+    padding: 5px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.save-btn {
+    background: var(--accent);
+    color: white;
+}
+
+.save-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.cancel-btn {
+    background: var(--bg-page);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.cancel-btn:hover {
+    background: var(--border);
+    transform: translateY(-1px);
+}
+
+.edit-word-btn:hover, .delete-word-btn:hover {
+    background: var(--border);
+}
+
+/* 空状态 */
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-light);
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+.empty-title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+.empty-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    display: grid;
+    flex-direction: column;
+    width: 418px;
+}
+
+/* 历史记录界面卡片样式 */
+.history-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.history-stats {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+    border-radius: 20px;
+}
+
+.history-item .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.history-item:last-child { border-bottom: none; }
+.history-item:hover {
+    background: var(--bg-page);
+}
+.history-content {
+    flex: 1;
+    min-width: 0;
+}
+.history-text {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    word-break: break-word;
+}
+.history-timestamp {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+.history-delete-btn {
+    background: transparent;
+    position: relative;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid rgb(255 0 0);
+    border-radius: 50%;
+    outline: none;
+    overflow: hidden;
+    color: rgb(255 0 0);
+    transition: color 0.3s 0.1s ease-out;
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+}
+
+.history-delete-btn span {
+  margin: 10px;
+}
+
+.history-delete-btn::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  content: "";
+  border-radius: 50%;
+  display: block;
+  width: 20em;
+  height: 20em;
+  left: -5em;
+  text-align: center;
+  transition: box-shadow 0.5s ease-out;
+  z-index: -1;
+}
+
+.history-delete-btn:hover {
+  color: #fff;
+  border: 1px solid rgb(255 0 0);
+}
+
+.history-delete-btn:hover::before {
+  box-shadow: inset 0 0 0 10em rgb(255 0 0);
+}
+
+.history-delete-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 二级分析界面样式 */
+#secondaryAnalysisContainer {
+    background: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.secondary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--btn-bg);
+    border: none;
+    color: var(--btn-color);
+    width: 44px;
+    height: 44px;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: var(--btn-shadow);
+    transition: all 0.2s;
+    transform: translateY(-1px);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--example-border);
+    padding: 0;
+}
+
+.back-button:hover {
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    box-shadow: 0 10px 16px rgba(0,0,0,0.3);
+    transform: translateY(-3px);
+}
+
+.back-button:active {
+    background: var(--btn-active-bg);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transform: translateY(1px);
+}
+
+.back-button svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.secondary-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+}
+
+#secondarySentencesContainer {
+    margin-top: 20px;
+}
+
+/* 移动端适配 */
+@media (max-width: 640px) {
+    body { padding: 12px; }
+    .sentence-text { font-size: 1rem; }
+    .button-group button { padding: 6px 14px; }
+    
+    /* 生词本移动端适配 */
+    .vocab-card {
+        padding: 16px;
+    }
+    .vocab-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .vocab-stats {
+        font-size: 0.85rem;
+    }
+    
+    /* 工具栏移动端适配 */
+    .words-toolbar {
+        flex-direction: row;
+        align-items: center;
+    }
+    .search-box, .sort-controls {
+        width: auto;
+    }
+    .search-input, .sort-select-trigger {
+        width: auto;
+    }
+    
+    /* 输入区域移动端适配 */
+    .create-notebook-section,
+    .add-word-section {
+        flex-direction: row;
+    }
+    .notebook-name-input,
+    .word-input,
+    .meaning-input {
+        width: 100%;
+    }
+    
+    /* 单词项移动端适配 */
+    .word-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .word-actions {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    /* 批量操作栏移动端适配 */
+    .batch-actions-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .batch-delete-btn {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    /* 生词本标签页移动端适配 */
+    .notebook-tabs {
+        flex-direction: row;
+    }
+    .notebook-tab-wrapper {
+        width: auto;
+        margin: 0 12px 12px 0;
+    }
+    .notebook-tab {
+        flex: 1;
+        text-align: left;
+    }
+    .notebook-actions {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* 所有单词项的操作按钮样式 */
+div#vocabWordsList > div.word-item > div.word-actions {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* 记忆模式界面样式 */
+.vocab-card.memory-mode-card {
+    background: var(--card-bg);
+    border-radius: 48px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 600px;
+}
+
+.memory-mode-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.memory-mode-header-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.header-section-btn {
+    margin-bottom: 0;
+    width: 100px;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--btn-bg);
+    border: none;
+    color: var(--btn-color);
+    width: 44px;
+    height: 44px;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: var(--btn-shadow);
+    transition: all 0.2s;
+    transform: translateY(-1px);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--example-border);
+    padding: 0;
+}
+
+.back-btn:hover {
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    box-shadow: 0 10px 16px rgba(0,0,0,0.3);
+    transform: translateY(-3px);
+}
+
+.back-btn:active {
+    background: var(--btn-active-bg);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transform: translateY(1px);
+}
+
+.back-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* 图标垂直位置调整 */
+div#sentencesContainer > div.sentence-card:nth-child(1) > div.sentence-buttons > button:nth-child(4) > span > span:nth-child(1) > svg {
+    margin-top: -4px;
+    margin-bottom: -4px;
+}
+
+div#sentencesContainer > div.sentence-card:nth-child(1) > div.sentence-buttons > button:nth-child(3) > span > span:nth-child(1) > svg {
+    margin-top: -4px;
+    margin-bottom: -4px;
+}
+
+div#sentencesContainer > div.sentence-card:nth-child(1) > div.sentence-buttons > button:nth-child(2) > span > span:nth-child(1) > svg {
+    margin-top: -4px;
+    margin-bottom: -4px;
+}
+
+div#sentencesContainer > div.sentence-card:nth-child(1) > div.sentence-buttons > button:nth-child(1) > span > span:nth-child(1) > svg {
+    margin-top: -4px;
+    margin-bottom: -4px;
+}
+
+button#parseBtn > span > span:nth-child(1) > svg {
+    margin-top: -3px;
+    margin-bottom: -3px;
+}
+
+button#saveAnalysisBtn > span > span:nth-child(1) > svg {
+    margin-top: -3px;
+    margin-bottom: -3px;
+}
+
+button#highlightToggleBtn > span > span:nth-child(1) {
+    margin-top: -3px;
+    margin-bottom: -3px;
+}
+
+button#loadExampleBtn > span > span:nth-child(1) > svg {
+    margin-top: -4px;
+    margin-bottom: -4px;
+}
+
+button#highlightToggleBtn > span > span:nth-child(1) > svg {
+    margin-top: -4px;
+    margin-bottom: -4px;
+}
+
+.memory-mode-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.mode-select-section,
+.memory-stats-section,
+.memory-plan-section {
+    margin-bottom: 25px;
+}
+
+.mode-select-section h4,
+.memory-stats-section h4,
+.memory-plan-section h4 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.mode-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #f9fafb;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 10px;
+    text-align: left;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.mode-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.mode-btn:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.stats-content {
+    background-color: #f9fafb;
+    border-radius: 6px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.stat-value {
+    color: #111827;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.plan-content {
+    background-color: #f9fafb;
+    border-radius: 6px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.plan-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.goal-input {
+    width: 60px;
+    padding: 6px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    margin: 0 8px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.section-btn {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    border-radius: 40px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: left;
+}
+
+.section-btn:hover {
+    background-color: #e5e7eb;
+}
+
+.save-plan-btn {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.save-plan-btn:hover {
+    background-color: #2563eb;
+}
+
+/* 学习统计界面样式 */
+.stats-detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stats-section {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.stats-section h4 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #374151;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.stat-card .stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.stat-card .stat-label {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.trend-chart {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.chart-placeholder {
+    color: #6b7280;
+}
+
+/* 记忆模式界面特定按钮样式 */
+div#memoryModeInterface > div.memory-mode-header > div.memory-mode-header-buttons {
+    height: 38px;
+}
+
+div#memoryModeInterface > div.memory-mode-header > div.memory-mode-header-buttons > button.section-btn:nth-child(1) {
+    width: 90px;
+}
+
+div#memoryModeInterface > div.memory-mode-header > div.memory-mode-header-buttons > button.section-btn:nth-child(2) {
+    height: 37px;
+    width: 90px;
+}
+
+div#memoryModeInterface > div.mode-select-section {
+    display: flex;
+    height: 160px;
+}
+
+div#memoryModeInterface > div.mode-select-section > button.mode-btn:nth-child(1) {
+    border-radius: 30px;
+    font-size: 22px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: Impact, Charcoal, sans-serif;
+    font-weight: 800;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    text-align: center;
+}
+
+div#memoryModeInterface > div.mode-select-section > button.mode-btn:nth-child(2) {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 30px;
+    font-size: 22px;
+    font-family: Impact, Charcoal, sans-serif;
+    font-weight: 800;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    text-align: center;
+}
+
+div#memoryModeInterface > div.mode-select-section > button.mode-btn:nth-child(3) {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 30px;
+    font-size: 22px;
+    font-family: Impact, Charcoal, sans-serif;
+    font-weight: 800;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    text-align: center;
+}
+
+div#memoryModeInterface > div.mode-select-section > button.mode-btn:nth-child(4) {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 30px;
+    font-size: 22px;
+    font-family: Impact, Charcoal, sans-serif;
+    font-weight: 800;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    text-align: center;
+}
+
+div#memoryModeInterface > div.mode-select-section > button.mode-btn:nth-child(5) {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 30px;
+    font-size: 22px;
+}
+
+/* 学习计划界面样式 */
+.plan-detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.plan-section {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.plan-section h4 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #374151;
+}
+
+.goal-setting {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.goal-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reminder-setting {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reminder-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.history-placeholder {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    color: #6b7280;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .vocab-card.memory-mode-card {
+        padding: 15px;
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 100%;
+    }
+    
+    .memory-mode-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+    
+    .memory-mode-header h3 {
+        font-size: 16px;
+    }
+    
+    .mode-select-section h4,
+    .memory-stats-section h4,
+    .memory-plan-section h4 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    .mode-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    
+    .section-btn {
+        padding: 7px 12px;
+        font-size: 13px;
+    }
+    
+    .stats-content,
+    .plan-content {
+        padding: 12px;
+    }
+    
+    .stat-item {
+        padding: 6px 0;
+    }
+    
+    .stat-label,
+    .stat-value {
+        font-size: 13px;
+    }
+    
+    .plan-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    
+    .goal-input {
+        margin: 0;
+        width: 80px;
+    }
+    
+    .save-plan-btn {
+        padding: 7px 14px;
+        font-size: 13px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .goal-item,
+    .reminder-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vocab-card.memory-mode-card {
+        padding: 12px;
+    }
+    
+    .back-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    .mode-btn {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+    
+    .section-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    
+    .stats-content,
+    .plan-content {
+        padding: 10px;
+    }
+    
+    .stat-label,
+    .stat-value {
+        font-size: 12px;
+    }
+    
+    .save-plan-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 复制按钮样式 */
+.copy {
+  /* button */
+  --button-bg: var(--accent);
+  --button-hover-bg: var(--accent-hover);
+  --button-text-color: white;
+  --button-hover-text-color: white;
+  --button-border-radius: 10px;
+  --button-diameter: 36px;
+  --button-outline-width: 1px;
+  --button-outline-color: var(--accent);
+  /* tooltip */
+  --tooltip-bg: var(--card-bg);
+  --toolptip-border-radius: 4px;
+  --tooltip-font-family: Menlo, Roboto Mono, monospace;
+  /* 👆 this field should not be empty */
+  --tooltip-font-size: 12px;
+  /* 👆 this field should not be empty */
+  --tootip-text-color: var(--text);
+  --tooltip-padding-x: 7px;
+  --tooltip-padding-y: 7px;
+  --tooltip-offset: 8px;
+  /* --tooltip-transition-duration: 0.3s; */
+  /* 👆 if you need a transition,
+  just remove the comment,
+  but I didn't like the transition :| */
+}
+
+.copy {
+  box-sizing: border-box;
+  width: var(--button-diameter);
+  height: var(--button-diameter);
+  border-radius: var(--button-border-radius);
+  background-color: var(--button-bg);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.tooltip {
+  position: absolute;
+  opacity: 0;
+  visibility: 0;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: var(--tooltip-font-size) var(--tooltip-font-family);
+  color: var(--tootip-text-color);
+  background: var(--tooltip-bg);
+  padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
+  border-radius: var(--toolptip-border-radius);
+  pointer-events: none;
+  transition: all var(--tooltip-transition-duration) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.tooltip::before {
+  content: attr(data-text-initial);
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: calc(var(--tooltip-padding-y) / 2 * -1);
+  width: var(--tooltip-padding-y);
+  height: var(--tooltip-padding-y);
+  background: inherit;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: -999;
+  pointer-events: none;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-left: none;
+}
+
+.copy svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+}
+
+.checkmark {
+  display: none;
+}
+
+/* actions */
+
+.copy:hover .tooltip,
+.copy:focus:not(:focus-visible) .tooltip {
+  opacity: 1;
+  visibility: visible;
+  top: calc((100% + var(--tooltip-offset)) * -1);
+}
+
+.copy:focus:not(:focus-visible) .tooltip::before {
+  content: attr(data-text-end);
+}
+
+.copy:focus:not(:focus-visible) .clipboard {
+  display: none;
+}
+
+.copy:focus:not(:focus-visible) .checkmark {
+  display: block;
+}
+
+.copy:hover,
+.copy:focus {
+  background-color: var(--button-hover-bg);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.copy:active {
+  outline: var(--button-outline-width) solid var(--button-outline-color);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.copy:hover svg {
+  color: var(--button-hover-text-color);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .copy {
+  --button-bg: var(--accent);
+  --button-hover-bg: var(--accent-hover);
+  --button-outline-color: var(--accent);
+}
+
+[data-theme="dark"] .tooltip {
+  --tooltip-bg: var(--card-bg);
+  --tootip-text-color: var(--text);
+}
+
+/* 清空历史记录按钮样式 */
+.button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
+  position: relative;
+  margin-left: 9px;
+  margin-right: 9px;
+}
+
+.svgIcon {
+  width: auto;
+  height: auto;
+  transition-duration: .3s;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.history-delete-btn .svgIcon path {
+  fill: var(--danger);
+}
+
+.history-delete-btn:hover .svgIcon path {
+  fill: white;
+}
+
+.button:hover {
+  width: 140px;
+  border-radius: 50px;
+  transition-duration: .3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.button:hover .svgIcon {
+  width: 50px;
+  transition-duration: .3s;
+  transform: translateY(60%);
+}
+
+.button::before {
+  position: absolute;
+  top: -20px;
+  content: "清空";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.button:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(30px);
+  transition-duration: .3s;
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .button {
+  background-color: var(--card-bg);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .button:hover {
+  background-color: rgb(255, 69, 69);
+}
+
+/* 主按钮菜单样式 */
+.menu {
+  padding: 0.5rem;
+  background-color: var(--card-bg);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border-radius: 40px;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.075);
+  gap: 8px;
+}
+
+.link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 40px;
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transform-origin: center left;
+  transition: width 0.2s ease-in;
+  text-decoration: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+#deepParseMainBtn, #vocabMainBtn, #historyMainBtn {
+  border-radius: 50px;
+}
+
+.link:before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  display: block;
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  transform: translateX(-100%);
+  transition: transform 0.2s ease-in;
+  transform-origin: center left;
+  background-color: var(--accent);
+}
+
+.link:hover,
+.link:focus,
+.link.active {
+  outline: 0;
+  width: 120px;
+  color: white;
+}
+
+.link:hover:before,
+.link:focus:before,
+.link.active:before,
+.link:hover .link-title,
+.link:focus .link-title,
+.link.active .link-title {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.link-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+  left: 16px;
+  position: absolute;
+}
+
+.link-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--accent);
+  transition: color 0.2s ease-in;
+}
+
+.link:hover .link-icon svg,
+.link:focus .link-icon svg,
+.link.active .link-icon svg {
+  color: white;
+}
+
+.link-title {
+  transform: translateX(100%);
+  transition: transform 0.2s ease-in;
+  transform-origin: center right;
+  display: block;
+  text-align: center;
+  text-indent: 28px;
+  width: 100%;
+  opacity: 0;
+  white-space: nowrap;
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .menu {
+  background-color: var(--card-bg);
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .link {
+  color: var(--text);
+}
